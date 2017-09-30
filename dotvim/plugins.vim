@@ -61,14 +61,9 @@ let g:yankring_history_dir = '~/.backup'
 "nmap <unique> <silent> <Leader>. :CommandTFlush<CR>:CommandT<CR>
 "let g:CommandTMatchWindowAtTop=1
 
+" ctrlP
 let g:ctrlp_map = '<leader>,'
 let g:ctrlp_cmd = 'CtrlP'
-
-nmap <leader>. :CtrlPClearCache<cr>:CtrlP<cr>
-nmap <leader>l :CtrlPLine<cr>
-nmap <leader>b :CtrlPBuff<cr>
-nmap <leader>m :CtrlPBufTag<cr>
-nmap <leader>M :CtrlPBufTagAll<cr>
 
 let g:ctrlp_clear_cache_on_exit = 1
 " ctrlp leaves stale caches behind if there is another vim process running
@@ -94,6 +89,26 @@ let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files --exclude-standard -c
 let g:ctrlp_open_multiple_files = 'vjr'
 
 let g:ctrlp_extensions = ['tag', 'buffertag', 'quickfix', 'mixed', 'line']
+
+" 기본 무시 설정
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/](\.(git|hg|svn)|\_site)$',
+  \ 'file': '\v\.(exe|so|dll|class|png|jpg|jpeg)$',
+\}
+
+" 가장 가까운 .git 디렉토리를 cwd(현재 작업 디렉토리)로 사용
+" 버전 관리를 사용하는 프로젝트를 할 때 꽤 적절하다.
+" .svn, .hg, .bzr도 지원한다.
+let g:ctrlp_working_path_mode = 'r'
+
+nmap <leader>. :CtrlPClearCache<cr>:CtrlP<cr>
+nmap <leader>l :CtrlPLine<cr>
+nmap <leader>b :CtrlPBuff<cr>
+nmap <leader>m :CtrlPBufTag<cr>
+nmap <leader>M :CtrlPBufTagAll<cr>
+nmap <leader>bb :CtrlPBuffer<cr>
+nmap <leader>bm :CtrlPMixed<cr>
+nmap <leader>bs :CtrlPMRU<cr>
 
 " Fugitive
 " ,g for Ggrep
@@ -159,16 +174,21 @@ call unite#filters#matcher_default#use(['matcher_fuzzy'])
 
 " vim-rspec
 " RSpec.vim mappings
-map <Leader>t :call RunCurrentSpecFile()<CR>
-map <Leader>s :call RunNearestSpec()<CR>
-map <Leader>l :call RunLastSpec()<CR>
-map <Leader>a :call RunAllSpecs()<CR>))))
+"map <Leader>t :call RunCurrentSpecFile()<CR>
+"map <Leader>s :call RunNearestSpec()<CR>
+"map <Leader>l :call RunLastSpec()<CR>
+"map <Leader>a :call RunAllSpecs()<CR>))))
 " rspec command for vim-rspec
-let g:rspec_command = 'call Send_to_Tmux("rspec {spec}\n")'
+"let g:rspec_command = 'call Send_to_Tmux("rspec {spec}\n")'
 
 " vim-airline
 let g:airline_powerline_fonts=1
 let g:airline_theme='light' " dark simple badwolf solarized solarized2
+" 버퍼 목록 켜기
+let g:airline#extensions#tabline#enabled = 1
+
+" 파일명만 출력
+let g:airline#extensions#tabline#fnamemod = ':t'
 set noshowmode
 
 " vim-jsx-pretty

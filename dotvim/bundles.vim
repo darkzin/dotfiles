@@ -40,6 +40,8 @@ NeoBundle 'rking/ag.vim'
 NeoBundle 'austintaylor/vim-indentobject'
 " global search & replace
 NeoBundle 'greplace.vim'
+" statusline for airline
+
 " better looking statusline
 NeoBundle 'bling/vim-airline'
 " plugin for resolving three-way merge conflicts
